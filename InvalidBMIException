@@ -1,0 +1,32 @@
+class InvalidBMIException extends Exception {
+    InvalidBMIException(String message) {
+        super(message);
+    }
+}
+class BMICalculator {
+    static double calculateBMI(double weight, double height)
+            throws InvalidBMIException {
+        double bmi = weight / (height * height);
+        if (bmi <= 0) {
+            throw new InvalidBMIException(
+                "Invalid BMI: value cannot be zero or negative.");
+        }
+        return bmi;
+    }
+}
+public class BMIDemo {
+    public static void main(String[] args) {
+        try {
+            double bmi = BMICalculator.calculateBMI(0, 1.7);
+            System.out.println("BMI: " + bmi);
+        } catch (InvalidBMIException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        try {
+            double bmi2 = BMICalculator.calculateBMI(65, 1.7);
+            System.out.println("BMI: " + bmi2);
+        } catch (InvalidBMIException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
